@@ -1,0 +1,124 @@
+/* ==========================================================================
+   CSS DÀNH RIÊNG CHO TRANG ĐĂNG NHẬP (LOGIN.CSS)
+   ========================================================================== */
+
+/* Thêm class login-body để không xung đột với thẻ body của trang chủ */
+body.login-body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fdfbf7 0%, #f3e5d8 100%);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #424242;
+}
+
+/* --- KHỐI ĐĂNG NHẬP TRUNG TÂM --- */
+.login-box {
+    background: white;
+    padding: 45px 40px;
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(92, 61, 46, 0.08);
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    border: 1px solid #f1ebe4;
+    animation: fadeInUp 0.6s ease-out; 
+    box-sizing: border-box;
+    margin: 20px;
+}
+
+.login-box h2 {
+    color: #5c3d2e;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif; 
+    font-weight: 700;
+}
+
+.login-box p { 
+    color: #888; 
+    margin-bottom: 35px; 
+    font-size: 0.95rem; 
+}
+
+/* --- FORM NHẬP LIỆU --- */
+.form-group-login { 
+    margin-bottom: 20px; 
+    text-align: left; 
+}
+
+.form-group-login label {
+    display: block; 
+    font-weight: 600; 
+    color: #5c3d2e; 
+    margin-bottom: 8px; 
+    font-size: 0.95rem;
+}
+
+.form-control-login {
+    width: 100%; 
+    padding: 14px 15px; 
+    border: 1px solid #ddd; 
+    border-radius: 12px;
+    font-family: inherit; 
+    font-size: 1rem; 
+    outline: none; 
+    box-sizing: border-box;
+    background: #fafafa;
+    transition: all 0.3s;
+}
+
+.form-control-login:focus { 
+    border-color: #e65100; 
+    background: white;
+    box-shadow: 0 0 0 4px rgba(230,81,0,0.1); 
+}
+
+/* --- NÚT ĐĂNG NHẬP --- */
+.btn-login {
+    width: 100%; 
+    padding: 15px; 
+    background: #e65100; 
+    color: white; 
+    border: none;
+    border-radius: 12px; 
+    font-size: 1.05rem; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(230, 81, 0, 0.2);
+}
+
+.btn-login:hover { 
+    background: #cc4800; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 20px rgba(230, 81, 0, 0.3);
+}
+
+.btn-login:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.error-msg { 
+    color: #d32f2f; 
+    font-size: 0.9rem; 
+    margin-top: 15px; 
+    display: none; 
+    background: #ffebee;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* --- HIỆU ỨNG ANIMATION --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}

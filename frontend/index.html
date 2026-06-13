@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bếp Việt - Tinh Hoa Ẩm Thực</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+
+    <header class="header glass" id="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-text">BếpViệt.</span>
+            </div>
+            <nav class="nav" id="nav">
+                <a class="nav-link" onclick="showSection('home')">Khám phá</a>
+                <a class="nav-link" onclick="showSection('recipes')">Công thức</a>
+                <a class="nav-link" onclick="showSection('favorites')">Yêu thích</a>
+                
+                <a href="#" id="cartNavLink" class="nav-link" onclick="openShoppingList(); return false;">
+                    🛒 Giỏ đi chợ
+                    <span id="cartBadge">0</span>
+                </a>
+            </nav>
+            <button class="theme-toggle" id="themeToggle">🌙</button>
+        </div>
+    </header>
+
+    <section class="hero-modern" id="home">
+        <div class="hero-container">
+            <div class="hero-text-box">
+                <span class="badge-premium">2026</span>
+                <h1 class="title-huge">Nấu ăn ngon<br><span class="text-gradient">Mỗi ngày.</span></h1>
+                <p class="subtitle">Khám phá hàng ngàn công thức nấu ăn chuẩn vị Việt, được thiết kế tối giản và dễ làm nhất dành cho bạn.</p>
+                
+                <div class="hero-stats-modern">
+                    <div><b id="stat-recipes">0</b> <span>Món ngon</span></div>
+                    <div class="divider"></div>
+                    <div><b id="stat-categories">0</b> <span>Danh mục</span></div>
+                </div>
+                <button class="btn-glow" onclick="showSection('recipes')">Khám phá ngay ➔</button>
+            </div>
+            <div class="hero-image-box">
+                <div class="circle-decor"></div>
+                <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?q=80&w=1000&auto=format&fit=crop" alt="Food" class="floating-food">
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-light" id="featured">
+        <div class="container">
+            <h2 class="section-heading">🔥 Đang Thịnh Hành</h2>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper" id="featuredGrid"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="recipes">
+        <div class="container">
+            <h2 class="section-heading text-center">Công Thức Của Chúng Tôi</h2>
+            
+            <div class="search-filter-wrapper">
+                <div class="diet-tabs">
+                    <button class="tab-btn active-default" onclick="switchDietType('Tất cả')" id="tab-tatca">
+    <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Bento%20box/3D/bento_box_3d.png" width="22" height="22" style="vertical-align: middle; margin-right: 5px;"> Tất Cả
+</button>
+<button class="tab-btn" onclick="switchDietType('Mặn')" id="tab-man">
+    <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Cut%20of%20meat/3D/cut_of_meat_3d.png" width="22" height="22" style="vertical-align: middle; margin-right: 5px;"> Món Mặn
+</button>
+<button class="tab-btn" onclick="switchDietType('Chay')" id="tab-chay">
+    <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Green%20salad/3D/green_salad_3d.png" width="22" height="22" style="vertical-align: middle; margin-right: 5px;"> Món Chay
+</button>
+<button class="tab-btn" onclick="switchDietType('Đồ uống')" id="tab-douong">
+    <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Bubble%20tea/3D/bubble_tea_3d.png" width="22" height="22" style="vertical-align: middle; margin-right: 5px;"> Đồ Uống
+</button>
+                </div>
+
+                <div class="search-container">
+                    <input type="text" id="searchInput" autocomplete="off" oninput="document.getElementById('clearBtn').style.display = this.value ? 'block' : 'none'; searchRecipes()" placeholder="Tìm kiếm món ăn...">
+                    <span id="clearBtn" onclick="document.getElementById('searchInput').value = ''; this.style.display = 'none'; searchRecipes(); document.getElementById('searchInput').focus();">✕</span>
+                </div>
+                
+                <select id="categoryFilter" onchange="applyFilters()">
+                    <option value="all">🍔 Tất cả danh mục</option>
+                    <option value="Canh">🥣 Canh & Súp</option>
+                    <option value="Xào">🥘 Món xào</option>
+                    <option value="Luộc">🥚 Món luộc</option>
+                    <option value="Nướng">🔥 Món nướng</option>
+                    <option value="Tráng miệng">🍮 Tráng miệng</option>
+                    <option value="Cơm">🍚 Cơm & Bún</option>
+                </select>
+            </div>
+
+            <div class="filter-row-secondary">
+                <select id="difficultyFilter" onchange="applyFilters()">
+                    <option value="all">Mọi độ khó</option>
+                    <option value="Dễ">Dễ</option>
+                    <option value="Trung bình">Trung bình</option>
+                    <option value="Khó">Khó</option>
+                </select>
+                <button class="btn-sort" onclick="sortRecipes()">↑↓ Sắp xếp</button>
+            </div>
+
+            <div class="result-info" id="resultInfo"></div>
+            
+            <div class="recipe-grid" id="recipeGrid"></div>
+            <div id="paginationContainer"></div>
+            <div class="empty-state" id="emptyState">🍳 Không tìm thấy món ăn phù hợp!</div>
+        </div>
+    </section>
+
+    <section class="section" id="favorites">
+        <div class="container">
+            <h2 class="section-heading">❤️ Tủ Bếp Của Bạn</h2>
+            <div class="recipe-grid" id="favGrid"></div>
+            <div class="empty-state" id="favEmpty">Bạn chưa lưu món ăn nào vào tủ!</div>
+        </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <h2 class="newsletter-title">Nhận công thức mới nhất</h2>
+            <p class="newsletter-desc">Nhập Email của bạn để nhận những công thức món ăn và kinh nghiệm hay từ Bếp Việt nhé. Chúng tôi nói không với Spam và cam kết chỉ gửi thông tin thật sự hữu ích!</p>
+            <div class="newsletter-form">
+                <input type="email" id="subEmail" placeholder="Nhập email của bạn...">
+                <button class="newsletter-btn" onclick="subscribeNewsletter()">Đăng ký ngay</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-modern" id="modal">
+            <button class="modal-close" onclick="closeRecipeModal()">✕</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <footer class="footer-dark">
+        <div class="container footer-dark-grid">
+            <div class="footer-col">
+                <h2 class="footer-logo">BếpViệt.</h2>
+                <p class="kls-title">Know - Love - Share</p>
+                <div class="kls-desc">
+                    <p><b>Know:</b> Hiểu rõ điều đang làm và luôn học hỏi mỗi ngày</p>
+                    <p><b>Love:</b> Đặt cái tâm, cái tình vào mỗi công thức</p>
+                    <p><b>Share:</b> Chia sẻ niềm hạnh phúc qua những món ăn</p>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Liên hệ</h3>
+                <ul class="contact-list">
+                    <li><span class="icon">📍</span> Học viện Công nghệ Bưu chính Viễn thông, Hà Nội</li>
+                    <li><span class="icon">📞</span> 0865439007</li>
+                    <li><span class="icon">📧</span> contact@bepviet.vn</li>
+                </ul>
+                <div class="dmca-badge">
+                    <img src="https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=bepviet" alt="DMCA.com Protection Status" />
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Theo dõi chúng tôi</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/1DqJ2Lvge1/?mibextid=wwXIfr" target="_blank" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://youtube.com" target="_blank" class="social-btn youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/hnh_o7/" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+                <ul class="footer-links">
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="ads.html">Chính Sách Quảng Cáo</a></li>
+                    <li><a href="privacy.html">Chính Sách Bảo Mật</a></li>
+                    <li><a href="disclaimer.html">Miễn Trừ Trách Nhiệm</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-dark-bottom">
+            <p>Copyright © 2026 Bếp Việt. All Right Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <div class="fab-container" id="fabContainer">
+        <div class="fab-main" onclick="document.getElementById('fabContainer').classList.toggle('open')" title="Công cụ hỗ trợ">👨‍🍳</div>
+        <div class="fab-item bg-fridge" onclick="openFridgeModal(); document.getElementById('fabContainer').classList.remove('open')" title="🧊 Tủ lạnh còn gì?">🧊</div>
+        <div class="fab-item bg-focus" onclick="startFocusMode(); document.getElementById('fabContainer').classList.remove('open')" title="📱 Chế độ Đứng bếp">📱</div>
+        <div class="fab-item bg-convert" onclick="openConverterModal(); document.getElementById('fabContainer').classList.remove('open')" title="⚖️ Sổ tay đong đếm">⚖️</div>
+    </div>
+
+</body>
+</html>

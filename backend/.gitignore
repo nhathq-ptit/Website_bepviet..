@@ -1,0 +1,8 @@
+# Bỏ qua thư viện của Node.js
+node_modules/
+
+# Bỏ qua file biến môi trường bảo mật
+.env
+
+# Bỏ qua thư mục ảnh upload (chỉ giữ lại code)
+backend/uploads/

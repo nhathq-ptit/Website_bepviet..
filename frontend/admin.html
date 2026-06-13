@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị Bếp Việt - Thêm Công Thức</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <div class="admin-container">
+        
+        <div class="admin-header">
+            <h2>🍳 Quản trị Bếp Việt</h2>
+            <a href="index.html" class="btn-ghost">← Quay lại Trang chủ</a>
+        </div>
+        
+        <div class="stat-container">
+            <div class="stat-card stat-recipes">
+                <h3 class="stat-title">Tổng số công thức</h3>
+                <h1 class="stat-num" id="dashRecipes">0</h1>
+            </div>
+            <div class="stat-card stat-subs">
+                <h3 class="stat-title">Khách đăng ký Email</h3>
+                <h1 class="stat-num" id="dashSubs">0</h1>
+            </div>
+        </div>
+
+        <form id="addRecipeForm">
+            <div class="form-grid">
+                
+                <div class="form-group">
+                    <label>Tên món ăn (*)</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="recipeName" class="form-control input-with-clear" required autocomplete="off"
+                               oninput="document.getElementById('clearNameBtn').style.display = this.value ? 'block' : 'none'" 
+                               onfocus="typeof showCustomHistory === 'function' && showCustomHistory()" 
+                               onblur="setTimeout(() => typeof hideCustomHistory === 'function' && hideCustomHistory(), 200)"
+                               onchange="typeof saveCustomHistory === 'function' && saveCustomHistory(this.value)"
+                               placeholder="VD: Bún riêu cua...">
+                        
+                        <span id="clearNameBtn" class="clear-input-btn"
+                              onclick="document.getElementById('recipeName').value = ''; this.style.display = 'none'; document.getElementById('recipeName').focus();">
+                            ✕
+                        </span>
+                        <ul id="customHistoryDropdown" class="history-dropdown"></ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Vùng miền</label>
+                    <select id="recipeRegion" class="form-control">
+                        <option value="Miền Bắc">Miền Bắc</option>
+                        <option value="Miền Trung">Miền Trung</option>
+                        <option value="Miền Nam">Miền Nam</option>
+                        <option value="Khắp nơi">Khắp nơi (Đa vùng miền)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Thời gian nấu</label>
+                    <input type="text" id="recipeTime" class="form-control" placeholder="VD: 45 phút">
+                </div>
+
+                <div class="form-group">
+                    <label>Số người ăn</label>
+                    <input type="number" id="recipeServings" class="form-control" placeholder="VD: 4" min="1">
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Lượng Kcal</label>
+                    <input type="number" id="recipeCalories" class="form-control" placeholder="VD: 450" min="0">
+                    <div class="hint">Ước tính tổng lượng calo của món ăn.</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Chế độ ăn 🎯</label>
+                    <select id="recipeDietType" class="form-control" onchange="updateCategories()">
+                        <option value="Mặn">🍖 Món Mặn</option>
+                        <option value="Chay">🌱 Món Chay</option>
+                        <option value="Đồ uống">🍹 Đồ uống</option>
+                    </select>
+                </div>   
+
+                <div class="form-group">
+                    <label>Danh mục (*)</label>
+                    <select id="recipeCategory" class="form-control" required>
+                        <option value="Canh">🥣 Canh & Súp</option>
+                        <option value="Xào">🥘 Món xào</option>
+                        <option value="Luộc">🥚 Món luộc</option>
+                        <option value="Nướng">🔥 Món nướng</option>
+                        <option value="Tráng miệng">🍮 Tráng miệng</option>
+                        <option value="Cơm">🍚 Cơm & Bún</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Độ khó</label>
+                    <select id="recipeDifficulty" class="form-control">
+                        <option value="Dễ">Dễ</option>
+                        <option value="Trung bình">Trung bình</option>
+                        <option value="Khó">Khó</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Hình ảnh món ăn (Tải lên từ máy)</label>
+                    <input type="file" id="recipeImage" class="form-control file-input" accept="image/*">
+                    <div class="hint">Chọn một bức ảnh định dạng JPG, PNG từ máy tính của bạn.</div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Mô tả ngắn</label>
+                    <textarea id="recipeDesc" class="form-control" placeholder="Viết vài dòng giới thiệu sự hấp dẫn về món ăn..."></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Nguyên liệu (*)</label>
+                    <textarea id="recipeIngredients" class="form-control" required placeholder="500g sườn non&#10;3 quả cà chua&#10;Hành lá..."></textarea>
+                    <div class="hint">Mỗi nguyên liệu viết trên 1 dòng (Nhấn Enter để xuống dòng).</div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Các bước thực hiện (*)</label>
+                    <textarea id="recipeSteps" class="form-control" required placeholder="Bước 1: Rửa sạch sườn...&#10;Bước 2: Xào cà chua..."></textarea>
+                    <div class="hint">Mỗi bước viết trên 1 dòng (Nhấn Enter để xuống dòng). Có thể ghi '30 phút' để app tự tạo Đồng hồ thông minh.</div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Mẹo hay (Tip)</label>
+                    <input type="text" id="recipeTip" class="form-control" placeholder="VD: Nên cho chút muối khi luộc để giữ màu sắc đẹp hơn...">
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                💾 Lưu Công Thức
+            </button>
+        </form>
+
+        <hr class="admin-divider">
+        
+        <div class="admin-header no-border">
+            <div>
+                <h2 class="section-title">📋 Quản lý Công Thức</h2>
+                <p class="section-desc">Thực hiện Sửa, Xóa hoặc Đánh dấu Thịnh hành tại đây.</p>
+            </div>
+        </div>
+        
+        <div class="table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên món ăn</th>
+                        <th>Danh mục</th>
+                        <th class="text-center">Thịnh hành</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="adminTableBody">
+                    </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

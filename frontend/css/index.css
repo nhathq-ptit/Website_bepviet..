@@ -1,0 +1,357 @@
+/* ==========================================================================
+   CHÍNH SÁCH PHÂN TÁCH CSS CHO TRANG CHỦ BẾP VIỆT (INDEX.CSS)
+   ========================================================================== */
+
+/* --- 1. KHỐI LƯỚI HIỂN THỊ MÓN ĂN (RECIPE GRID) --- */
+#recipeGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Giữ cố định 3 cột gọn gàng */
+    gap: 20px;
+    align-content: start;                  /* Ép các món ăn luôn bám hàng trên */
+    overflow-x: hidden;                    /* Khóa cuộn ngang chống giật lag */
+    transition: min-height 0.3s ease;       /* Co giãn chiều cao mượt mà */
+}
+
+/* Hiệu ứng lướt từ trái sang phải của các món ăn */
+.recipe-card {
+    opacity: 0; 
+    animation: slideToRight 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideToRight {
+    0%   { opacity: 0; transform: translateX(-40px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+/* --- 2. ĐỊNH DẠNG HEADER BỔ SUNG --- */
+#cartNavLink {
+    display: inline-flex; 
+    align-items: center; 
+    gap: 6px; 
+    text-decoration: none;
+}
+
+#cartBadge {
+    background: #e53935; 
+    color: white; 
+    border-radius: 12px; 
+    padding: 2px 8px; 
+    font-size: 0.85rem; 
+    font-weight: bold; 
+    display: none; 
+    box-shadow: 0 2px 5px rgba(229,57,53,0.4);
+}
+
+.floating-food {
+    object-fit: cover; 
+    aspect-ratio: 1 / 1;
+}
+
+/* --- 3. KHỐI TÌM KIẾM & BỘ LỌC (SEARCH & FILTERS) --- */
+.search-filter-wrapper {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 15px; 
+    justify-content: center; 
+    align-items: center; 
+    margin: 20px 0 15px 0; 
+    background: white; 
+    padding: 15px; 
+    border-radius: 50px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.diet-tabs {
+    display: flex; 
+    gap: 5px; 
+    background: #f5f5f5; 
+    padding: 5px; 
+    border-radius: 30px;
+}
+
+.diet-tabs .tab-btn {
+    padding: 10px 20px; 
+    border-radius: 25px; 
+    border: none; 
+    font-weight: bold; 
+    cursor: pointer; 
+    background: transparent; 
+    color: #555; 
+    transition: 0.3s;
+}
+
+/* Trạng thái tab active mặc định ban đầu */
+.diet-tabs .tab-btn.active-default {
+    background: #e65100; 
+    color: white;
+}
+
+.search-container {
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    flex-grow: 1; 
+    min-width: 250px;
+}
+
+#searchInput {
+    padding: 12px 40px 12px 20px; 
+    border-radius: 25px; 
+    border: 1px solid #ddd; 
+    width: 100%; 
+    outline: none; 
+    font-family: inherit;
+}
+
+#clearBtn {
+    display: none; 
+    position: absolute; 
+    right: 15px; 
+    cursor: pointer; 
+    color: #999; 
+    font-weight: bold; 
+    font-size: 16px; 
+    padding: 5px; 
+    z-index: 10;
+}
+
+#categoryFilter {
+    padding: 12px 20px; 
+    border-radius: 25px; 
+    border: 1px solid #ddd; 
+    outline: none; 
+    cursor: pointer; 
+    font-family: inherit;
+}
+
+.filter-row-secondary {
+    display: flex; 
+    justify-content: center; 
+    gap: 15px; 
+    margin-bottom: 30px;
+}
+
+#difficultyFilter {
+    padding: 10px; 
+    border-radius: 10px; 
+    font-family: inherit; 
+    outline: none; 
+    border: 1px solid #ddd; 
+    cursor: pointer;
+}
+
+.btn-sort {
+    padding: 10px 20px; 
+    border-radius: 10px; 
+    background: #333; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+    font-weight: bold;
+}
+
+#resultInfo {
+    text-align: center; 
+    margin-bottom: 15px; 
+    color: #666; 
+    font-size: 0.95rem;
+}
+
+.empty-state {
+    display: none; 
+    text-align: center; 
+    margin-top: 50px; 
+    font-size: 1.2rem; 
+    color: #999; 
+    font-weight: bold;
+}
+
+/* --- 4. BỘ ĐĂNG KÝ BẢN TIN (NEWSLETTER SECTION) --- */
+.newsletter-section {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2); 
+    padding: 60px 24px; 
+    text-align: center;
+}
+
+.newsletter-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter-title {
+    font-family: 'Playfair Display', serif; 
+    font-size: 2rem; 
+    color: #5c3d2e; 
+    margin-bottom: 16px;
+}
+
+.newsletter-desc {
+    color: #555; 
+    margin-bottom: 24px; 
+    line-height: 1.6;
+}
+
+.newsletter-form {
+    display: flex; 
+    gap: 10px; 
+    justify-content: center; 
+    flex-wrap: wrap;
+}
+
+#subEmail {
+    padding: 12px 20px; 
+    width: 100%; 
+    max-width: 350px; 
+    border: 1px solid #ccc; 
+    border-radius: 30px; 
+    outline: none; 
+    font-family: inherit; 
+    font-size: 1rem;
+}
+
+.newsletter-btn {
+    padding: 12px 24px; 
+    border-radius: 30px; 
+    border: none; 
+    background-color: #e65100; 
+    color: white; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s; 
+    font-size: 1rem;
+}
+
+/* --- 5. ĐƯỜNG LINK CHÂN TRANG (FOOTER LINKS) --- */
+.footer-links {
+    list-style: none; 
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+/* --- 6. NÚT ĐA NĂNG LƠ LỬNG (FAB SYSTEM) --- */
+.fab-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    width: 60px;
+    height: 60px;
+    animation: float 3s ease-in-out infinite; 
+}
+
+@keyframes float {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-10px); } 
+    100% { transform: translateY(0px); }
+}
+
+.fab-item {
+    position: absolute;
+    bottom: 6px; 
+    right: 6px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 1;
+    font-size: 1.3rem;
+    color: white;
+    opacity: 0;
+    transform: scale(0.3) translateY(0);
+    transition: all 0.25s cubic-bezier(0.4, 0, 1, 1); 
+}
+
+/* Quản lý mã màu của nút FAB qua Class Modifier thay vì viết inline style */
+.fab-item.bg-fridge { background: #2196f3; }
+.fab-item.bg-focus  { background: #9c27b0; }
+.fab-item.bg-convert { background: #ff9800; }
+
+.fab-container.open .fab-item:nth-child(2) { animation: bounceNuts1 0.45s forwards; }
+.fab-container.open .fab-item:nth-child(3) { animation: bounceNuts2 0.45s forwards; animation-delay: 0.04s; }
+.fab-container.open .fab-item:nth-child(4) { animation: bounceNuts3 0.45s forwards; animation-delay: 0.08s; }
+
+@keyframes bounceNuts1 {
+    0%   { transform: scale(0.3) translateY(0); opacity: 0; }
+    60%  { transform: scale(1.15) translateY(-90px); opacity: 1; }
+    80%  { transform: scale(0.95) translateY(-70px); }
+    100% { transform: scale(1.0) translateY(-75px); opacity: 1; } 
+}
+@keyframes bounceNuts2 {
+    0%   { transform: scale(0.3) translateY(0); opacity: 0; }
+    60%  { transform: scale(1.15) translateY(-160px); opacity: 1; }
+    80%  { transform: scale(0.95) translateY(-135px); }
+    100% { transform: scale(1.0) translateY(-140px); opacity: 1; }
+}
+@keyframes bounceNuts3 {
+    0%   { transform: scale(0.3) translateY(0); opacity: 0; }
+    60%  { transform: scale(1.15) translateY(-230px); opacity: 1; }
+    80%  { transform: scale(0.95) translateY(-195px); }
+    100% { transform: scale(1.0) translateY(-205px); opacity: 1; }
+}
+
+.fab-main {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff3d00, #dd2c00);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 0 6px rgba(255, 61, 0, 0.25), 0 0 0 12px rgba(255, 61, 0, 0.1), 0 4px 15px rgba(221, 44, 0, 0.5); 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.35);
+    z-index: 10;
+    font-size: 1.8rem;
+    color: white;
+}
+
+ 
+.fab-container.open .fab-main {
+    transform: rotate(360deg) scale(1.08); 
+    box-shadow: 0 0 0 10px rgba(255, 61, 0, 0.2), 0 0 0 20px rgba(255, 61, 0, 0.05), 0 6px 20px rgba(221, 44, 0, 0.4); 
+}
+
+.fab-item img, .fab-main img {
+    width: 65%;
+    height: 65%;
+    object-fit: contain;
+}
+
+/* --- CĂN CHỈNH KHỐI PHÂN TRANG --- */
+#paginationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    gap: 8px; /* Tạo khoảng cách đều giữa các nút bấm */
+}
+
+/* Tinh chỉnh thêm một chút cho các nút phân trang nếu cần */
+.page-btn {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.page-btn.active {
+    background: #e65100;
+    color: white;
+    border-color: #e65100;
+    font-weight: bold;
+}
+.page-btn:hover:not(.active) {
+    background: #f5f5f5;
+}
