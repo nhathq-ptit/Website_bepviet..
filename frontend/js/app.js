@@ -3,8 +3,8 @@
 let RECIPES = [];            // Mảng chứa toàn bộ dữ liệu gốc từ Server
 let filteredRecipes = [];    // Mảng chứa dữ liệu sau khi Lọc/Tìm kiếm
 let sortAscending = true;    // Trạng thái sắp xếp A-Z hay Z-A
-let currentSection = "home"; // Nhận biết đang ở trang nào (Home, Recipes, v.v.)
-let currentDietType = 'Tất cả'; // Chế độ ăn hiện tại (Mặn, Chay...)
+let currentSection = "home"; // Nhận biết đang ở trang nào (Home, Recipes,...)
+let currentDietType = 'Tất cả'; // Chế độ ăn hiện tại (Mặn, Chay,...)
 
 // Cấu hình Phân trang (Pagination)
 let ITEMS_PER_PAGE = 6;      // Số món ăn hiển thị trên 1 trang
@@ -83,7 +83,7 @@ function renderSkeletons(elementId, count = 6) {
 
 // 2. Fetch API tải dữ liệu món ăn từ Server
 async function loadRecipesFromMySQL() {
-    renderSkeletons("recipeGrid", 8); // Đã có lại hàm renderSkeletons ở đây!
+    renderSkeletons("recipeGrid", 8);
     renderSkeletons("featuredGrid", 4);
 
     try {
@@ -456,7 +456,7 @@ function renderFavorites() {
     }
 }
      
-// PHẦN 6: TÍNH NĂNG GIỎ ĐI CHỢ TỰ ĐỘNG (SHOPPING CART)
+// PHẦN 6: TÍNH NĂNG GIỎ HÀNG
      
 function saveCartData() {
     localStorage.setItem("bepviet_cart", JSON.stringify(shoppingCart));
@@ -585,7 +585,7 @@ function openShoppingList() {
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 }
      
-// PHẦN 7: TỦ LẠNH CÒN GÌ NẤU NẤY (AI FRIDGE MATCHING)
+// PHẦN 7: TÍNH NĂNG LỌC TỪ NGUYÊN LIỆU
      
 function openFridgeModal() {
     let modalHTML = `
