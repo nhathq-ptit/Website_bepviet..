@@ -1,4 +1,4 @@
-// 0. NẠP BIẾN MÔI TRƯỜNG TỪ FILE .env (BẮT BUỘC ĐỂ TRÊN CÙNG)
+// 0. NẠP BIẾN MÔI TRƯỜNG TỪ FILE .env
 require('dotenv').config();
 
 // 1. IMPORT THƯ VIỆN & CẤU HÌNH APP
@@ -11,7 +11,7 @@ const fs = require('fs');
 
 const app = express();
 
-// 🚀 Lấy cổng PORT từ file .env. Nếu trong .env không ghi gì thì mặc định chạy 3001
+// Lấy cổng PORT từ file .env. Nếu trong .env không ghi gì thì mặc định chạy 3001
 const PORT = process.env.PORT || 3001;
 
 // Middleware xử lý CORS và JSON
@@ -109,7 +109,7 @@ db.serialize(() => {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )`);
 
-    // 🚀 DỮ LIỆU MẶC ĐỊNH BAN ĐẦU
+    // DỮ LIỆU MẶC ĐỊNH BAN ĐẦU
     db.get("SELECT COUNT(*) as count FROM Users", (err, row) => {
         if (row && row.count === 0) {
             db.run(`INSERT INTO Users (username, password, role) VALUES ('admin', 'bepviet2026', 'Admin')`);
@@ -324,9 +324,9 @@ app.delete('/api/recipes/:id', (req, res) => {
    
 // 8. KHỞI ĐỘNG SERVER
 app.listen(PORT, () => {
-    console.log(`🚀 Backend quan hệ đã chạy tại cổng: ${PORT}`);
+    console.log(` Backend quan hệ đã chạy tại cổng: ${PORT}`);
     
     setInterval(() => {
-        console.log("💖 Server vẫn đang sống...");
+        console.log(" Server vẫn đang sống...");
     }, 3600000); 
 });
